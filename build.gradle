@@ -1,0 +1,52 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.2'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'king'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'mysql:mysql-connector-java:8.0.32'
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
+
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    //mvc 타임리프 및 채팅 기능 테스트용 의존성
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation group: 'org.webjars', name: 'sockjs-client', version: '1.1.2'
+    implementation group: 'org.webjars', name: 'stomp-websocket', version: '2.3.3-1'
+    implementation group: 'org.webjars.bower', name: 'vue', version: '2.5.16'
+    implementation group: 'org.webjars.bower', name: 'bootstrap', version: '4.3.1'
+    implementation group: 'org.webjars.bower', name: 'axios', version: '0.17.1'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
